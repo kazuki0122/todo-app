@@ -21,6 +21,7 @@
           />
           <v-card-actions>
             <v-btn class="info" @click="submit">Sign in</v-btn>
+            <v-btn  class="info" router-link to="/signup">sign up</v-btn>
           </v-card-actions>
         </v-form>
       </v-card-text>
