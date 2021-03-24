@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import { auth } from '../main' 
+// import { db } from '../main'
 export default {
   name: 'app',
   data:() => ({
@@ -39,7 +40,7 @@ export default {
   }),
   methods:{
     submit(){
-       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+       auth.signInWithEmailAndPassword(this.email, this.password)
        .then(() => {
           alert('Success!')
           this.$router.push('/')
