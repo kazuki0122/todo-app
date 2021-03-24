@@ -3,6 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import router from './router';
 import firebase from 'firebase'
+import 'firebase/firestore'
 
 Vue.config.productionTip = false
 
@@ -18,6 +19,9 @@ const config = {
 };
 
 firebase.initializeApp(config);
+
+export const db = firebase.firestore()
+export const auth = firebase.auth()
 
 new Vue({
   router,

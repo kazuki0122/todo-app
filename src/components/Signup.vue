@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-
+import { auth } from '../main' 
+// import { db } from '../main'
 export default {
   name: 'app',
   data:() => ({
@@ -40,9 +40,13 @@ export default {
   }),
   methods:{
     submit(){
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      auth.createUserWithEmailAndPassword(this.email, this.password)
       .then(user => {
-        alert('Create account: ', user.email)
+        console.log(user)
+        // db.collection('users').doc(user.user.uid).set({
+        //   email: this.email
+        // })
+        alert('Create account')
         this.$router.push('/')
       })
       .catch(error => {
