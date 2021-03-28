@@ -7,21 +7,19 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from "firebase";
 
 export default {
-  name: 'App',
-  data: () => ({
-    
-  }),
-  mounted(){
-    firebase.auth().onAuthStateChanged(function(user) {
+  name: "App",
+  data: () => ({}),
+  mounted() {
+    firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        console.log('login');
+        console.log("login");
       } else {
-        console.log('logout');
+        console.log("logout");
       }
-    });     
-  }
+    });
+  },
 };
 </script>

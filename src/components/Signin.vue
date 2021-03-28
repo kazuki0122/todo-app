@@ -2,7 +2,7 @@
   <v-app>
     <v-card width="400px" class="mx-auto mt-5">
       <v-card-title>
-        <h1 class="dispay-1">Sign in</h1>
+        <h1 class="display-1">Sign in</h1>
       </v-card-title>
       <v-card-text>
         <v-form>
@@ -21,7 +21,7 @@
           />
           <v-card-actions>
             <v-btn class="info" @click="submit">Sign in</v-btn>
-            <v-btn  class="info" router-link to="/signup">sign up画面へ</v-btn>
+            <v-btn class="info" router-link to="/signup">sign up画面へ</v-btn>
           </v-card-actions>
         </v-form>
       </v-card-text>

@@ -4,6 +4,8 @@ import Todo from './components/Todo';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import firebase from 'firebase';
+// import header from './components/Header';
+
 
 Vue.use(Router)
 
@@ -13,8 +15,8 @@ let router =  new Router({
     {
      path: '/',
      name: 'Todo',
-      component: Todo,
-     meta: { requiresAuth: true }
+     component: Todo,
+     meta: { requiresAuth: true },
     },
     {
      path: '/signup',
