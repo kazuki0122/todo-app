@@ -54,11 +54,12 @@ export default {
       if (this.newTodoName === "") {
         return;
       }
-      db.collection("tasks").add({
+      db.collection("users").doc(user.uid).collection("tasks").add({
         content: this.newTodoName,
         isComplete: false,
         editTask: false,
         uid: user.uid,
+        createdAt: new Date(),
       });
       this.newTodoName = "";
     },
