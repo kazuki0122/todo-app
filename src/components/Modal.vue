@@ -54,13 +54,28 @@ export default {
       if (this.newTodoName === "") {
         return;
       }
-      db.collection("users").doc(user.uid).collection("tasks").add({
-        content: this.newTodoName,
-        isComplete: false,
-        editTask: false,
-        uid: user.uid,
-        createdAt: new Date(),
-      });
+      let size = db
+        .collection("users")
+        .doc(user.uid)
+        .collection("tasks")
+        .get()
+        .then((snap) => {
+          size = snap.lenght; // will return the collection size
+        });
+
+      console.log(size);
+
+      db.collection("users")
+        .doc(user.uid)
+        .collection("tasks")
+        .add({
+          content: this.newTodoName,
+          isComplete: false,
+          editTask: false,
+          uid: user.uid,
+          sort_id: (size += 1),
+          createdAt: new Date(),
+        });
       this.newTodoName = "";
     },
   },

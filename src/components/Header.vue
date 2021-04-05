@@ -6,11 +6,14 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list nav>
         <v-list-item-group>
-          <v-list-item>
-            <v-list-item-title>MY PAGE</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title @click="signOut">Sign Out</v-list-item-title>
+          <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-list-item v-for="item in items" :key="item.title" link>
+            <v-list-item-icon>
+              <v-icon> {{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-item-title>{{ item.title }}</v-item-title>
+            </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -23,7 +26,12 @@ import firebase from "firebase";
 export default {
   data() {
     return {
-      drawer: false,
+      drawer: null,
+      items: [
+        { title: "Dashboard", icon: "mdi-view-dashboard" },
+        { title: "Photos", icon: "mdi-image" },
+        { title: "About", icon: "mdi-help-box" },
+      ],
     };
   },
   methods: {
