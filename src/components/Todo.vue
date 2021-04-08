@@ -1,15 +1,13 @@
 <template>
   <div>
-    <Header />
     <template max-width="600px" class="mx-auto mt-5">
       <v-card-title>
         <v-layout justify-center>
-          <h3 class="text-center">To Do</h3>
+          <!-- <h3 class="text-center">To Do</h3> -->
         </v-layout>
       </v-card-title>
-      {{ todos }}
-      <draggable :list="todos" @end="movingTodo">
-        <Modal class="mb-1" />
+      <Modal class="mb-1" />
+      <draggable :list="todos" @end="movingTodo()">
         <div v-for="(todo, index) in todos" :key="index">
           <v-layout justify-center>
             <v-card
@@ -66,7 +64,6 @@
 
 <script>
 import { auth, db } from "../main";
-import Header from "./Header.vue";
 import Modal from "./Modal.vue";
 import draggable from "vuedraggable";
 
@@ -137,12 +134,16 @@ export default {
     },
     movingTodo() {
       // 配列をfor eachする→indexを取得して取得したindexをsortIdに割り当てる
-      //
+      // console.log(this.todos);
+      const user = auth.currentUser.uid;
+      this.todos.forEach((todo, index) => {
+        console.log(todo, index);
+        db.collection("users").doc(user).collection("tasks").doc(todo.id);
+      });
     },
   },
   components: {
     Modal,
-    Header,
     draggable,
   },
 };

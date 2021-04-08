@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify';
 import router from './router';
 import firebase from 'firebase'
 import 'firebase/firestore'
+import store from './store'
 
 Vue.config.productionTip = false
 
@@ -24,6 +25,7 @@ export const db = firebase.firestore()
 export const auth = firebase.auth()
 
 new Vue({
+  store,
   router,
   vuetify,
   render: h => h(App)

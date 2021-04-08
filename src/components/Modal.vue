@@ -54,6 +54,17 @@ export default {
       if (this.newTodoName === "") {
         return;
       }
+      let size = db
+        .collection("users")
+        .doc(user.uid)
+        .collection("tasks")
+        .get()
+        .then((snap) => {
+          size = snap.lenght; // will return the collection size
+        });
+
+      console.log(size);
+
       db.collection("users").doc(user.uid).collection("tasks").add({
         content: this.newTodoName,
         isComplete: false,

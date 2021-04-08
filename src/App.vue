@@ -1,6 +1,7 @@
 <template>
-  <v-app>
-    <v-main>
+  <v-app class="hidden">
+    <Header class="mb-16"></Header>
+    <v-main class="mt-16">
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -8,7 +9,7 @@
 
 <script>
 import firebase from "firebase";
-
+import Header from "./components/Header.vue";
 export default {
   name: "App",
   data: () => ({}),
@@ -21,5 +22,14 @@ export default {
       }
     });
   },
+  components: {
+    Header,
+  },
 };
 </script>
+
+<style scoped>
+.hidden {
+  overflow: hidden;
+}
+</style>
