@@ -65,17 +65,13 @@ export default {
 
       console.log(size);
 
-      db.collection("users")
-        .doc(user.uid)
-        .collection("tasks")
-        .add({
-          content: this.newTodoName,
-          isComplete: false,
-          editTask: false,
-          uid: user.uid,
-          sort_id: (size += 1),
-          createdAt: new Date(),
-        });
+      db.collection("users").doc(user.uid).collection("tasks").add({
+        content: this.newTodoName,
+        isComplete: false,
+        editTask: false,
+        uid: user.uid,
+        createdAt: new Date(),
+      });
       this.newTodoName = "";
     },
   },

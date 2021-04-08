@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     <template max-width="600px" class="mx-auto mt-5">
       <v-card-title>
         <v-layout justify-center>
@@ -65,7 +64,6 @@
 
 <script>
 import { auth, db } from "../main";
-import Header from "./Header.vue";
 import Modal from "./Modal.vue";
 import draggable from "vuedraggable";
 
@@ -146,7 +144,6 @@ export default {
   },
   components: {
     Modal,
-    Header,
     draggable,
   },
 };

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { db, auth } from "../main";
+import { db, auth } from "@/main";
 // import { db } from '../main'
 export default {
   name: "app",
