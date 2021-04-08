@@ -3,7 +3,8 @@ import Router from 'vue-router';
 import Todo from './components/Todo';
 import Signup from './components/users/Signup';
 import Signin from './components/users/Signin';
-import MyList from './components/MyList';
+import List from './components/Lists/List';
+import Task from './components/Tasks/Task';
 import firebase from 'firebase';
 
 // import header from './components/Header';
@@ -16,13 +17,18 @@ let router =  new Router({
   routes: [
     {
      path: '/',
-     name: 'MyList',
-     component: MyList,
+     name: 'List',
+     component: List,
     },
     {
-     path: '/:id/todo/',
-     name: 'Todo',
-     component: Todo,
+     path: '/:id/task',
+     name: 'Task',
+     component: Task,
+    },
+    {
+      path: '/todo',
+      name: 'Todo',
+      component: Todo,
     },
     {
      path: '/signup',

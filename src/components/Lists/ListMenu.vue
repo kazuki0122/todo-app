@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import DialogEdit from "./ListDialogs/DialogEdit.vue";
-import DialogDelete from "./ListDialogs/DialogDelete.vue";
+import DialogEdit from "@/components/ListDialogs/DialogEdit.vue";
+import DialogDelete from "@/components/ListDialogs/DialogDelete.vue";
 export default {
   props: ["list"],
   data: () => ({
@@ -48,7 +48,7 @@ export default {
         title: "Show Tasks",
         icon: "mdi-location-enter",
         click() {
-          this.$router.push({ name: "Todo", params: { id: this.list.id } });
+          this.$router.push({ name: "Task", params: { id: this.list.id } });
         },
       },
       {

@@ -2,27 +2,25 @@
   <v-app>
     <v-main class="mx-auto mt-4">
       <v-text-field
-        v-model="list"
+        v-model="task"
         outlined
-        label="Add List"
+        label="Add Task"
         append-icon="mdi-plus"
         hide-details
         clearable
-        @click:append="sendList"
+        @click:append="createTask"
       ></v-text-field>
-
       <v-list dense>
-        <v-subheader>My Lists</v-subheader>
+        <v-subheader>My Tasks</v-subheader>
         <v-list-item-group color="primary">
-          <div v-for="(list, i) in lists" :key="i" style="height: 60px">
+          <div v-for="(task, i) in tasks" :key="i" style="height: 60px">
             <v-list-item>
               <v-list-item-icon>
                 <v-icon>mdi-format-list-bulleted</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title v-text="list.list"></v-list-item-title>
+                <v-list-item-title v-text="task.content"></v-list-item-title>
               </v-list-item-content>
-              <TaskMenu :list="list" />
             </v-list-item>
             <v-divider></v-divider>
           </div>
@@ -33,53 +31,50 @@
 </template>
 
 <script>
-import { auth, db } from "../main";
+import { auth, db } from "@/main";
 import { mapState } from "vuex";
-import TaskMenu from "./TaskMenu.vue";
 export default {
   data() {
     return {
-      list: "",
+      task: "",
     };
-  },
-  components: {
-    TaskMenu,
   },
   computed: {
-    ...mapState(["lists"]),
+    ...mapState(["tasks"]),
   },
   methods: {
-    sendList: function () {
-      this.$store.dispatch("createList", { list: this.list });
-      this.list = "";
+    createTask: function () {
+      if (this.task === "") {
+        return;
+      }
+      let payload = {
+        content: this.task,
+        listId: this.$route.params.id,
+      };
+      this.$store.dispatch("createTask", payload);
+      this.task = "";
     },
-    deleteList: function (listId) {
-      this.$store.dispatch("deleteList", listId);
-    },
-  },
-  firestore() {
-    return {
-      task: db.collection("tasks"),
-    };
   },
   created() {
     // querySnapshotが現在のデータ
     // doc.id = ドキュメントのidのこと
     // doc.data()ドキュメントの中のdataのこと
     // .onSnapshot 変更があるたびに発火する
+    const listId = this.$route.params.id;
     auth.onAuthStateChanged((user) => {
       console.log(user.uid);
       db.collection("users")
         .doc(user.uid)
         .collection("lists")
+        .doc(listId)
+        .collection("tasks")
         .orderBy("createdAt")
         .onSnapshot((querySnapshot) => {
           console.log(querySnapshot);
-          const list = querySnapshot.docs.map((doc) => {
+          const task = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
           });
-          console.log(list);
-          this.$store.commit("updateList", list);
+          this.$store.dispatch("reloadTask", task);
         });
     });
   },

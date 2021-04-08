@@ -1,6 +1,12 @@
 <template>
   <header>
-    <v-app-bar absolute color="#fcb69f" dark src="material2.jpg" prominent>
+    <v-app-bar
+      absolute
+      color="#fcb69f"
+      dark
+      src="@/assets/material2.jpg"
+      prominent
+    >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-row class="mt-14">
         <LiveDateTime />
@@ -22,7 +28,12 @@
 
       <v-list nav>
         <v-list-item-group>
-          <v-list-item v-for="item in items" :key="item.title" link>
+          <v-list-item
+            v-for="(item, index) in items"
+            :key="item.title"
+            link
+            @click="handleClick(index)"
+          >
             <v-list-item-icon>
               <v-icon> {{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -45,8 +56,21 @@ export default {
     return {
       drawer: null,
       items: [
-        { title: " Todo", icon: "mdi-view-dashboard" },
-        { title: "About", icon: "mdi-help-box" },
+        {
+          title: "Go To List",
+          icon: "mdi-format-list-bulleted",
+          click() {
+            if (this.$route.path === "/") {
+              alert("Already on the list page");
+              return;
+            }
+            this.$router.push("/");
+          },
+        },
+        {
+          title: "About",
+          icon: "mdi-help-box",
+        },
       ],
       authenticatedUser: "",
     };
@@ -64,6 +88,9 @@ export default {
     });
   },
   methods: {
+    handleClick: function (index) {
+      this.items[index].click.call(this);
+    },
     signOut: function () {
       firebase
         .auth()
