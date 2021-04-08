@@ -15,11 +15,11 @@
         <v-list-item-group color="primary">
           <div v-for="(task, i) in tasks" :key="i" style="height: 60px">
             <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-format-list-bulleted</v-icon>
-              </v-list-item-icon>
+              <v-list-item-action>
+                <v-checkbox :input-value="active"></v-checkbox>
+              </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title v-text="task.content"></v-list-item-title>
+                <v-list-item-title>{{ task.content }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
@@ -39,6 +39,7 @@ export default {
       task: "",
     };
   },
+
   computed: {
     ...mapState(["tasks"]),
   },
