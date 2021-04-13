@@ -12,9 +12,6 @@
         <LiveDateTime />
       </v-row>
       <v-spacer></v-spacer>
-      <div v-if="authenticatedUser" class="mt-5">
-        <div @click="signOut" class="sign_out text-h6">Sign Out</div>
-      </div>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list-item>
@@ -70,6 +67,18 @@ export default {
         {
           title: "About",
           icon: "mdi-help-box",
+        },
+        {
+          title: "Sign Out",
+          icon: "mdi-logout",
+          click() {
+            firebase
+              .auth()
+              .signOut()
+              .then(() => {
+                this.$router.push("/signin");
+              });
+          },
         },
       ],
       authenticatedUser: "",

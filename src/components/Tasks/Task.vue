@@ -13,17 +13,33 @@
       <v-list dense>
         <v-subheader>My Tasks</v-subheader>
         <v-list-item-group color="primary">
-          <div v-for="(task, i) in tasks" :key="i" style="height: 60px">
-            <v-list-item>
-              <v-list-item-action>
-                <v-checkbox :input-value="active"></v-checkbox>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{ task.content }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-divider></v-divider>
-          </div>
+          <draggable v-model="tasks" handle=".handle">
+            <div v-for="(task, i) in tasks" :key="i" style="height: 60px">
+              <v-list-item
+                @click="completeTask(task, i)"
+                :class="{
+                  'blue lighten-5': task.isComplete,
+                }"
+              >
+                <v-list-item-action>
+                  <v-checkbox :input-value="task.isComplete"></v-checkbox>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title
+                    :class="{ 'text-decoration-line-through': task.isComplete }"
+                    >{{ task.content }}</v-list-item-title
+                  >
+                </v-list-item-content>
+                <TaskMenu :task="task" />
+                <v-list-item-action v-if="$store.state.sorting">
+                  <v-btn color="primary" class="handle" icon>
+                    <v-icon>mdi-drag-horizontal-variant</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+              <v-divider></v-divider>
+            </div>
+          </draggable>
         </v-list-item-group>
       </v-list>
     </v-main>
@@ -32,16 +48,32 @@
 
 <script>
 import { auth, db } from "@/main";
-import { mapState } from "vuex";
+import TaskMenu from "./TaskMenu.vue";
+import draggable from "vuedraggable";
 export default {
   data() {
     return {
       task: "",
     };
   },
-
+  components: {
+    TaskMenu,
+    draggable,
+  },
   computed: {
-    ...mapState(["tasks"]),
+    tasks: {
+      get() {
+        return this.$store.state.tasks;
+      },
+      set(value) {
+        console.log(value);
+        let payload = {
+          listId: this.$route.params.id,
+          value: value,
+        };
+        this.$store.dispatch("updateTask", payload);
+      },
+    },
   },
   methods: {
     createTask: function () {
@@ -55,26 +87,33 @@ export default {
       this.$store.dispatch("createTask", payload);
       this.task = "";
     },
+    completeTask: function (task, i) {
+      task.isComplete = !task.isComplete;
+      const payload = {
+        task: task,
+        i: i,
+        listId: this.$route.params.id,
+      };
+      this.$store.dispatch("completeTask", payload);
+    },
   },
   created() {
-    // querySnapshotが現在のデータ
-    // doc.id = ドキュメントのidのこと
-    // doc.data()ドキュメントの中のdataのこと
-    // .onSnapshot 変更があるたびに発火する
     const listId = this.$route.params.id;
     auth.onAuthStateChanged((user) => {
-      console.log(user.uid);
       db.collection("users")
         .doc(user.uid)
         .collection("lists")
         .doc(listId)
         .collection("tasks")
-        .orderBy("createdAt")
+        .orderBy("sortId")
         .onSnapshot((querySnapshot) => {
           console.log(querySnapshot);
           const task = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
           });
+          console.log(task);
+          const size = querySnapshot.size;
+          this.$store.commit("updateSortId", size);
           this.$store.dispatch("reloadTask", task);
         });
     });
