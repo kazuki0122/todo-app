@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <AchievementRate />
     <v-main class="mx-auto mt-4">
       <v-text-field
         v-model="task"
@@ -50,6 +51,7 @@
 import { auth, db } from "@/main";
 import TaskMenu from "./TaskMenu.vue";
 import draggable from "vuedraggable";
+import AchievementRate from "./AchievementRate.vue";
 export default {
   data() {
     return {
@@ -59,6 +61,7 @@ export default {
   components: {
     TaskMenu,
     draggable,
+    AchievementRate,
   },
   computed: {
     tasks: {

@@ -16,7 +16,7 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title"> Vuetify Todo </v-list-item-title>
+          <v-list-item-title class="title"> Task App </v-list-item-title>
           <v-list-item-subtitle> Best Todo Ever! </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
