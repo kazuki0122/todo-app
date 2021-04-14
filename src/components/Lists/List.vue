@@ -71,17 +71,14 @@ export default {
     // doc.data()ドキュメントの中のdataのこと
     // .onSnapshot 変更があるたびに発火する
     auth.onAuthStateChanged((user) => {
-      console.log(user.uid);
       db.collection("users")
         .doc(user.uid)
         .collection("lists")
         .orderBy("createdAt")
         .onSnapshot((querySnapshot) => {
-          console.log(querySnapshot);
           const list = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
           });
-          console.log(list);
           this.$store.commit("updateList", list);
         });
     });

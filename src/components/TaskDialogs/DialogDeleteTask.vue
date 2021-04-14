@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ["task"],
+  props: ["task", "i"],
   data() {
     return {
       dialog: false,
@@ -28,6 +28,7 @@ export default {
       const payload = {
         id: task.id,
         listId: this.$route.params.id,
+        index: this.i,
       };
       this.$store.dispatch("delteTask", payload);
     },

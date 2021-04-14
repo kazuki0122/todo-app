@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     saveList() {
-      console.log(1);
       let payload = {
         id: this.list.id,
         list: this.listTitle,

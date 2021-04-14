@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Todo from './components/Todo';
-import Signup from './components/users/Signup';
-import Signin from './components/users/Signin';
+import Signup from './components/Users/Signup';
+import Signin from './components/Users/Signin';
 import List from './components/Lists/List';
 import Task from './components/Tasks/Task';
+import Progress from './components/Progress';
 import firebase from 'firebase';
 
 // import header from './components/Header';
@@ -26,11 +26,6 @@ let router =  new Router({
      component: Task,
     },
     {
-      path: '/todo',
-      name: 'Todo',
-      component: Todo,
-    },
-    {
      path: '/signup',
      name: 'Signup',
      component: Signup
@@ -40,6 +35,11 @@ let router =  new Router({
      name: 'Signin',
      component: Signin
     },
+    {
+      path: '/progress',
+      name: 'Progress',
+      component: Progress
+    }
   ]
 })
 

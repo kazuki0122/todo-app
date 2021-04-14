@@ -29,6 +29,7 @@
       v-if="dialogs.delete"
       @close="dialogs.delete = false"
       :task="task"
+      :i="i"
     />
   </div>
 </template>
@@ -37,7 +38,7 @@
 import DialogEditTask from "@/components/TaskDialogs/DialogEditTask.vue";
 import DialogDeleteTask from "@/components/TaskDialogs/DialogDeleteTask.vue";
 export default {
-  props: ["task"],
+  props: ["task", "i"],
   data: () => ({
     dialogs: {
       edit: false,

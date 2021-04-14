@@ -39,7 +39,9 @@ const store = new Vuex.Store({
       state.tasks[task.i].task = task
     },
     delteTask(state, task) {
-      state.tasks = task
+      // 第一引数に配列の場所、第二引数に削除する数
+      // task.indexの位置の値を一つ削除する
+      state.tasks.splice(task.index,1)
     },
     editTask(state, task) {
       state.tasks = task
@@ -48,7 +50,6 @@ const store = new Vuex.Store({
       state.sorting = !state.sorting
     },
     updateTask(state, payload) {
-      // console.log('tasks: ',value)
       state.tasks = payload.value
     }
   },
@@ -151,7 +152,6 @@ const store = new Vuex.Store({
           .doc(task.id)
           .update({ sortId: index })
       });
-        
       context.commit('updateTask',payload)
     }
   },

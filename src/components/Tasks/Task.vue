@@ -31,7 +31,7 @@
                     >{{ task.content }}</v-list-item-title
                   >
                 </v-list-item-content>
-                <TaskMenu :task="task" />
+                <TaskMenu :task="task" :i="i" />
                 <v-list-item-action v-if="$store.state.sorting">
                   <v-btn color="primary" class="handle" icon>
                     <v-icon>mdi-drag-horizontal-variant</v-icon>
@@ -69,7 +69,6 @@ export default {
         return this.$store.state.tasks;
       },
       set(value) {
-        console.log(value);
         let payload = {
           listId: this.$route.params.id,
           value: value,
@@ -110,11 +109,9 @@ export default {
         .collection("tasks")
         .orderBy("sortId")
         .onSnapshot((querySnapshot) => {
-          console.log(querySnapshot);
           const task = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
           });
-          console.log(task);
           const size = querySnapshot.size;
           this.$store.commit("updateSortId", size);
           this.$store.dispatch("reloadTask", task);

@@ -65,8 +65,11 @@ export default {
           },
         },
         {
-          title: "About",
-          icon: "mdi-help-box",
+          title: "Progress Check",
+          icon: "mdi-progress-check",
+          click() {
+            this.$router.push("/progress");
+          },
         },
         {
           title: "Sign Out",
