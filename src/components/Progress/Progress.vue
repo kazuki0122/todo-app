@@ -26,7 +26,6 @@ export default {
   },
   computed: {
     ...mapState(["lists", "tasks"]),
-    completedTasks() {},
     progress() {
       if (this.completedTasks === 0) {
         return;

@@ -25,19 +25,21 @@
 
       <v-list nav>
         <v-list-item-group>
-          <v-list-item
-            v-for="(item, index) in items"
-            :key="item.title"
-            link
-            @click="handleClick(index)"
-          >
-            <v-list-item-icon>
-              <v-icon> {{ item.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          <div v-if="this.authenticatedUser === true">
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="item.title"
+              link
+              @click="handleClick(index)"
+            >
+              <v-list-item-icon>
+                <v-icon> {{ item.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </div>
           <div v-if="this.authenticatedUser === false">
             <v-list-item @click="gotosSignin">
               <v-list-item-icon>
@@ -47,7 +49,6 @@
                 <v-list-item-title>Sign in to Task App</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-
             <v-list-item @click="gotoSignup">
               <v-list-item-icon>
                 <v-icon> mdi-account-plus </v-icon>
