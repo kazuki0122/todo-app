@@ -4,16 +4,16 @@
       <v-text-field
         v-model="list"
         outlined
+        clearable
         label="Add List"
         append-icon="mdi-plus"
-        hide-details
-        clearable
+        hide-detais
         @click:append="sendList"
       ></v-text-field>
 
       <v-list dense>
-        <v-subheader>My Lists</v-subheader>
-        <v-list-item-group color="primary">
+        <v-subheader v-if="lists.length">My Lists</v-subheader>
+        <v-list-item-group color="primary" v-if="lists.length">
           <div v-for="(list, i) in lists" :key="i" style="height: 60px">
             <v-list-item>
               <v-list-item-icon>
@@ -27,6 +27,9 @@
             <v-divider></v-divider>
           </div>
         </v-list-item-group>
+        <div v-else class="no-lists">
+          <div class="text-h5 primary--text">No Lists</div>
+        </div>
       </v-list>
     </v-main>
   </v-app>
@@ -87,7 +90,10 @@ export default {
 </script>
 
 <style scoped>
-.v-text-field {
-  width: 350px;
+.no-lists {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
 }
 </style>

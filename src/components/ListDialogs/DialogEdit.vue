@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     saveList() {
-      let payload = {
+      const payload = {
         id: this.list.id,
         list: this.listTitle,
       };

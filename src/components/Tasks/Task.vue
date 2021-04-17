@@ -12,8 +12,8 @@
         @click:append="createTask"
       ></v-text-field>
       <v-list dense>
-        <v-subheader>My Tasks</v-subheader>
-        <v-list-item-group color="primary">
+        <v-subheader v-if="tasks.length">My Tasks</v-subheader>
+        <v-list-item-group color="primary" v-if="tasks.length">
           <draggable v-model="tasks" handle=".handle">
             <div v-for="(task, i) in tasks" :key="i" style="height: 60px">
               <v-list-item
@@ -42,6 +42,9 @@
             </div>
           </draggable>
         </v-list-item-group>
+        <div v-else class="no-tasks">
+          <div class="text-h5 primary--text">No Tasks</div>
+        </div>
       </v-list>
     </v-main>
   </v-app>
@@ -102,12 +105,14 @@ export default {
   created() {
     const listId = this.$route.params.id;
     auth.onAuthStateChanged((user) => {
+      const date = new Date();
+      date.setDate(date.getDate() - 1);
       db.collection("users")
         .doc(user.uid)
         .collection("lists")
         .doc(listId)
         .collection("tasks")
-        .orderBy("sortId")
+        .where("createdAt", ">", date)
         .onSnapshot((querySnapshot) => {
           const task = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
@@ -122,7 +127,10 @@ export default {
 </script>
 
 <style scoped>
-.v-text-field {
-  width: 350px;
+.no-tasks {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
 }
 </style>

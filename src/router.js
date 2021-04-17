@@ -4,15 +4,13 @@ import Signup from './components/Users/Signup';
 import Signin from './components/Users/Signin';
 import List from './components/Lists/List';
 import Task from './components/Tasks/Task';
-import Progress from './components/Progress';
+import Progress from './components/Progress/Progress';
 import firebase from 'firebase';
-
-// import header from './components/Header';
 
 
 Vue.use(Router)
 
-let router =  new Router({
+const router =  new Router({
   mode: "history",
   routes: [
     {

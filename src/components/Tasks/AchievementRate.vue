@@ -1,5 +1,10 @@
 <template>
-  <v-container style="max-width: 350px">
+  <div class="mx-auto mt-8">
+    <h2 class="display-1 success--text">
+      Tasks:
+      {{ tasks.length }}
+    </h2>
+    <v-divider class="mt-4"></v-divider>
     <v-row class="my-1" align="center">
       <strong class="mx-4 info--text text--darken-2">
         Remaining: {{ remainingTasks }}
@@ -11,20 +16,19 @@
         Completed: {{ completedTasks }}
       </strong>
 
-      <v-spacer></v-spacer>
-
       <v-progress-circular
         :rotate="-90"
         :value="progress"
-        :size="58"
+        :size="60"
         :width="8"
         class="mr-2"
         color="primary"
       >
-        {{ Math.ceil(progress) }}%
+        <div v-if="this.completedTasks === 0">0 %</div>
+        <div v-else>{{ Math.ceil(progress) }}%</div>
       </v-progress-circular>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -36,6 +40,9 @@ export default {
       return this.tasks.filter((task) => task.isComplete).length;
     },
     progress() {
+      if (this.completedTasks === 0) {
+        return;
+      }
       return (this.completedTasks / this.tasks.length) * 100;
     },
     remainingTasks() {

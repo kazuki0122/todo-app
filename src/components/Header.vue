@@ -68,6 +68,10 @@ export default {
           title: "Progress Check",
           icon: "mdi-progress-check",
           click() {
+            if (this.$route.path === "/progress") {
+              alert("Already on the progress page");
+              return;
+            }
             this.$router.push("/progress");
           },
         },

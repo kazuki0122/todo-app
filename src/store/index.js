@@ -109,7 +109,6 @@ const store = new Vuex.Store({
     },
     completeTask(context, payload) {
       const user = auth.currentUser;
-      // let taskUpdate = {}
        db.collection("users")
           .doc(user.uid)
           .collection("lists")
