@@ -106,13 +106,21 @@ export default {
     const listId = this.$route.params.id;
     auth.onAuthStateChanged((user) => {
       const date = new Date();
-      date.setDate(date.getDate() - 1);
+      const newdate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        0,
+        0,
+        0
+      );
+      console.log(newdate);
       db.collection("users")
         .doc(user.uid)
         .collection("lists")
         .doc(listId)
         .collection("tasks")
-        .where("createdAt", ">", date)
+        .where("createdAt", ">", newdate)
         .onSnapshot((querySnapshot) => {
           const task = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });

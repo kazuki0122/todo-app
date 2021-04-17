@@ -38,6 +38,25 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <div v-if="this.authenticatedUser === false">
+            <v-list-item @click="gotosSignin">
+              <v-list-item-icon>
+                <v-icon> mdi-login </v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Sign in to Task App</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="gotoSignup">
+              <v-list-item-icon>
+                <v-icon> mdi-account-plus </v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Create your account</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </div>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -61,6 +80,10 @@ export default {
               alert("Already on the list page");
               return;
             }
+            if (this.authenticatedUser === false) {
+              alert("Please register as a member");
+              return;
+            }
             this.$router.push("/");
           },
         },
@@ -72,6 +95,10 @@ export default {
               alert("Already on the progress page");
               return;
             }
+            if (this.authenticatedUser === false) {
+              alert("Please register as a member");
+              return;
+            }
             this.$router.push("/progress");
           },
         },
@@ -79,6 +106,10 @@ export default {
           title: "Sign Out",
           icon: "mdi-logout",
           click() {
+            if (this.authenticatedUser === false) {
+              alert("You are already signed out");
+              return;
+            }
             firebase
               .auth()
               .signOut()
@@ -114,6 +145,20 @@ export default {
         .then(() => {
           this.$router.push("/signin");
         });
+    },
+    gotoSignup: function () {
+      if (this.$route.path === "/signup") {
+        alert("Already on the signup page");
+        return;
+      }
+      this.$router.push("/signup");
+    },
+    gotosSignin: function () {
+      if (this.$route.path === "/signin") {
+        alert("Already on the signin page");
+        return;
+      }
+      this.$router.push("/signin");
     },
   },
 };
