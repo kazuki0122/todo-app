@@ -16,7 +16,7 @@ const router =  new Router({
     {
      path: '/',
      name: 'List',
-     component: List,
+      component: List,
     },
     {
      path: '/:id/task',
@@ -42,8 +42,7 @@ const router =  new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  if (requiresAuth) {
+  if (to.path === '/' || to.path === '/progress' || to.name === 'Task') {
     // このルートはログインされているかどうか認証が必要です。
     // もしされていないならば、ログインページにリダイレクトします。
     firebase.auth().onAuthStateChanged(function (user) {
@@ -56,7 +55,7 @@ router.beforeEach((to, from, next) => {
       }
     })
   } else {
-    next() // next() を常に呼び出すようにしてください!
+    next() 
   }
 })
 

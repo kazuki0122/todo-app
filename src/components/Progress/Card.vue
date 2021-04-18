@@ -1,6 +1,6 @@
 <template>
   <v-card height="350">
-    <v-card-title>Title: {{ list.list }}</v-card-title>
+    <v-card-title>{{ list.list }}</v-card-title>
     <v-card-subtitle>
       Number of tasks per week: {{ this.weeklyTasks.length }}
     </v-card-subtitle>
