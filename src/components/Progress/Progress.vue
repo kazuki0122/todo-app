@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container>
+    <v-container v-if="lists.length">
       <v-row>
         <v-col
           v-for="(list, index) in lists"
@@ -13,6 +13,9 @@
         </v-col>
       </v-row>
     </v-container>
+    <div v-else class="no-tasks">
+      <div class="text-h5 primary--text">No Tasks</div>
+    </div>
   </v-main>
 </template>
 
@@ -48,23 +51,14 @@ export default {
         });
     });
   },
-  // methods: {
-  //   copleteTask: function () {
-  //     this.lists.forEach(async (list) => {
-  //       const user = auth.currentUser;
-  //       console.log(user.uid);
-  //       console.log(list.id);
-  //       const userRef = db
-  //         .collection("users")
-  //         .doc(user.uid)
-  //         .collection("lists")
-  //         .doc(list.id)
-  //         .collection("tasks")
-  //         .where("isComplete", "==", true);
-  //       const userDoc = await userRef.get();
-  //       console.log(userDoc);
-  //     });
-  //   },
-  // },
 };
 </script>
+
+<style scoped>
+.no-tasks {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, +500%);
+}
+</style>
