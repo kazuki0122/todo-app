@@ -94,6 +94,6 @@ export default {
   position: absolute;
   left: 50%;
   top: 40%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -300%);
 }
 </style>
