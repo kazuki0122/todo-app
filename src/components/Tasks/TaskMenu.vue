@@ -20,37 +20,32 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <DialogEdit
+    <DialogEditTask
       v-if="dialogs.edit"
       @close="dialogs.edit = false"
-      :list="list"
+      :task="task"
     />
-    <DialogDelete
+    <DialogDeleteTask
       v-if="dialogs.delete"
       @close="dialogs.delete = false"
-      :list="list"
+      :task="task"
+      :i="i"
     />
   </div>
 </template>
 
 <script>
-import DialogEdit from "./ListDialogs/DialogEdit.vue";
-import DialogDelete from "./ListDialogs/DialogDelete.vue";
+import DialogEditTask from "@/components/TaskDialogs/DialogEditTask.vue";
+import DialogDeleteTask from "@/components/TaskDialogs/DialogDeleteTask.vue";
 export default {
-  props: ["list"],
+  props: ["task", "i"],
   data: () => ({
     dialogs: {
       edit: false,
       delete: false,
+      sort: false,
     },
     items: [
-      {
-        title: "Show Tasks",
-        icon: "mdi-location-enter",
-        click() {
-          this.$router.push({ name: "Todo", params: { id: this.list.id } });
-        },
-      },
       {
         title: "Edit",
         icon: "mdi-pencil",
@@ -65,11 +60,18 @@ export default {
           this.dialogs.delete = true;
         },
       },
+      {
+        title: "Sort",
+        icon: "mdi-drag-horizontal-variant",
+        click() {
+          this.$store.commit("sortTask");
+        },
+      },
     ],
   }),
   components: {
-    DialogEdit,
-    DialogDelete,
+    DialogEditTask,
+    DialogDeleteTask,
   },
   methods: {
     handleClick(index) {
@@ -78,6 +80,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

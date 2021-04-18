@@ -1,21 +1,15 @@
 <template>
   <v-dialog :value="true" persistent max-width="290">
     <v-card>
-      <v-card-title class="headline"> Delete List? </v-card-title>
+      <v-card-title class="headline"> Delete task? </v-card-title>
       <v-card-text
         >Are you sure you wanna delete this gosh darn motherflipping
-        list?</v-card-text
+        task?</v-card-text
       >
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="$emit('close')"> No </v-btn>
-        <v-btn
-          color="red darken-1"
-          text
-          @click="$store.dispatch('deleteList', list.id)"
-        >
-          Yes
-        </v-btn>
+        <v-btn color="red darken-1" text @click="delteTask(task)"> Yes </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -23,11 +17,21 @@
 
 <script>
 export default {
-  props: ["list"],
+  props: ["task", "i"],
   data() {
     return {
       dialog: false,
     };
+  },
+  methods: {
+    delteTask: function (task) {
+      const payload = {
+        id: task.id,
+        listId: this.$route.params.id,
+        index: this.i,
+      };
+      this.$store.dispatch("delteTask", payload);
+    },
   },
 };
 </script>

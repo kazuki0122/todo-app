@@ -1,19 +1,22 @@
 <template>
   <header>
-    <v-app-bar absolute color="#fcb69f" dark src="material2.jpg" prominent>
+    <v-app-bar
+      absolute
+      color="#fcb69f"
+      dark
+      src="@/assets/material2.jpg"
+      prominent
+    >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-row class="mt-14">
         <LiveDateTime />
       </v-row>
       <v-spacer></v-spacer>
-      <div v-if="authenticatedUser" class="mt-5">
-        <div @click="signOut" class="sign_out text-h6">Sign Out</div>
-      </div>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title"> Vuetify Todo </v-list-item-title>
+          <v-list-item-title class="title"> Task App </v-list-item-title>
           <v-list-item-subtitle> Best Todo Ever! </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -22,14 +25,39 @@
 
       <v-list nav>
         <v-list-item-group>
-          <v-list-item v-for="item in items" :key="item.title" link>
-            <v-list-item-icon>
-              <v-icon> {{ item.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          <div v-if="this.authenticatedUser === true">
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="item.title"
+              link
+              @click="handleClick(index)"
+            >
+              <v-list-item-icon>
+                <v-icon> {{ item.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </div>
+          <div v-if="this.authenticatedUser === false">
+            <v-list-item @click="gotosSignin">
+              <v-list-item-icon>
+                <v-icon> mdi-login </v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Sign in to Task App</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item @click="gotoSignup">
+              <v-list-item-icon>
+                <v-icon> mdi-account-plus </v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Create your account</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </div>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -45,8 +73,52 @@ export default {
     return {
       drawer: null,
       items: [
-        { title: " Todo", icon: "mdi-view-dashboard" },
-        { title: "About", icon: "mdi-help-box" },
+        {
+          title: "Go To List",
+          icon: "mdi-format-list-bulleted",
+          click() {
+            if (this.$route.path === "/") {
+              alert("Already on the list page");
+              return;
+            }
+            if (this.authenticatedUser === false) {
+              alert("Please register as a member");
+              return;
+            }
+            this.$router.push("/");
+          },
+        },
+        {
+          title: "Progress Check",
+          icon: "mdi-progress-check",
+          click() {
+            if (this.$route.path === "/progress") {
+              alert("Already on the progress page");
+              return;
+            }
+            if (this.authenticatedUser === false) {
+              alert("Please register as a member");
+              return;
+            }
+            this.$router.push("/progress");
+          },
+        },
+        {
+          title: "Sign Out",
+          icon: "mdi-logout",
+          click() {
+            if (this.authenticatedUser === false) {
+              alert("You are already signed out");
+              return;
+            }
+            firebase
+              .auth()
+              .signOut()
+              .then(() => {
+                this.$router.push("/signin");
+              });
+          },
+        },
       ],
       authenticatedUser: "",
     };
@@ -64,6 +136,9 @@ export default {
     });
   },
   methods: {
+    handleClick: function (index) {
+      this.items[index].click.call(this);
+    },
     signOut: function () {
       firebase
         .auth()
@@ -71,6 +146,20 @@ export default {
         .then(() => {
           this.$router.push("/signin");
         });
+    },
+    gotoSignup: function () {
+      if (this.$route.path === "/signup") {
+        alert("Already on the signup page");
+        return;
+      }
+      this.$router.push("/signup");
+    },
+    gotosSignin: function () {
+      if (this.$route.path === "/signin") {
+        alert("Already on the signin page");
+        return;
+      }
+      this.$router.push("/signin");
     },
   },
 };

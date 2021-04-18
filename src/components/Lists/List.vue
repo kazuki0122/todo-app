@@ -4,16 +4,16 @@
       <v-text-field
         v-model="list"
         outlined
+        clearable
         label="Add List"
         append-icon="mdi-plus"
-        hide-details
-        clearable
+        hide-detais
         @click:append="sendList"
       ></v-text-field>
 
       <v-list dense>
-        <v-subheader>My Lists</v-subheader>
-        <v-list-item-group color="primary">
+        <v-subheader v-if="lists.length">My Lists</v-subheader>
+        <v-list-item-group color="primary" v-if="lists.length">
           <div v-for="(list, i) in lists" :key="i" style="height: 60px">
             <v-list-item>
               <v-list-item-icon>
@@ -22,20 +22,23 @@
               <v-list-item-content>
                 <v-list-item-title v-text="list.list"></v-list-item-title>
               </v-list-item-content>
-              <TaskMenu :list="list" />
+              <ListMenu :list="list" />
             </v-list-item>
             <v-divider></v-divider>
           </div>
         </v-list-item-group>
+        <div v-else class="no-lists">
+          <div class="text-h5 primary--text">No Lists</div>
+        </div>
       </v-list>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import { auth, db } from "../main";
+import { auth, db } from "@/main";
 import { mapState } from "vuex";
-import TaskMenu from "./TaskMenu.vue";
+import ListMenu from "./ListMenu.vue";
 export default {
   data() {
     return {
@@ -43,13 +46,16 @@ export default {
     };
   },
   components: {
-    TaskMenu,
+    ListMenu,
   },
   computed: {
     ...mapState(["lists"]),
   },
   methods: {
     sendList: function () {
+      if (this.list === "") {
+        return;
+      }
       this.$store.dispatch("createList", { list: this.list });
       this.list = "";
     },
@@ -68,17 +74,14 @@ export default {
     // doc.data()ドキュメントの中のdataのこと
     // .onSnapshot 変更があるたびに発火する
     auth.onAuthStateChanged((user) => {
-      console.log(user.uid);
       db.collection("users")
         .doc(user.uid)
         .collection("lists")
         .orderBy("createdAt")
         .onSnapshot((querySnapshot) => {
-          console.log(querySnapshot);
           const list = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
           });
-          console.log(list);
           this.$store.commit("updateList", list);
         });
     });
@@ -87,7 +90,10 @@ export default {
 </script>
 
 <style scoped>
-.v-text-field {
-  width: 350px;
+.no-lists {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
 }
 </style>
