@@ -1,13 +1,26 @@
 <template>
-  <v-card height="350">
-    <v-card-title>{{ list.list }}</v-card-title>
-    <v-card-subtitle>
-      Number of tasks per week: {{ this.weeklyTasks.length }}
+  <v-card height="420">
+    <v-card-title class="justify-center text-subtitle-1 font-weight-medium">
+      {{ list.list }}</v-card-title
+    >
+    <v-divider></v-divider>
+
+    <v-card-subtitle class="mt-5 d-flex justify-center">
+      <v-icon color="primary" class="mr-2"> mdi-format-list-checks </v-icon>
+      <div class="text-subtitle-2 mt-2">Number of tasks per week:</div>
+      <div class="text-h4 ml-3 black--text">
+        {{ this.weeklyTasks.length }}
+      </div>
     </v-card-subtitle>
-    <v-card-subtitle class="success--text">
-      Number of tasks completed: {{ completedTasks }}
+
+    <v-card-subtitle class="success--text d-flex justify-center">
+      <v-icon color="red" class="mr-2"> mdi-fire </v-icon>
+      <div class="text-subtitle-2 mt-2">Number of tasks completed:</div>
+      <div class="text-h4 ml-3 red--text">
+        {{ completedTasks }}
+      </div>
     </v-card-subtitle>
-    <v-row class="my-1" justify="center">
+    <v-row justify="center">
       <v-progress-circular
         :rotate="-90"
         :value="progress"

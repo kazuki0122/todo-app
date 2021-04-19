@@ -2,13 +2,7 @@
   <v-main>
     <v-container v-if="lists.length">
       <v-row>
-        <v-col
-          v-for="(list, index) in lists"
-          :key="index"
-          cols="12"
-          lg="6"
-          xl="3"
-        >
+        <v-col v-for="(list, index) in lists" :key="index" cols="12" lg="6">
           <Card :list="list" />
         </v-col>
       </v-row>

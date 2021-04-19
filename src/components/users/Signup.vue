@@ -6,7 +6,7 @@
       max-width="600"
       min-height="300"
     >
-      <v-card-title>
+      <v-card-title class="justify-center">
         <h3>Create your account</h3>
       </v-card-title>
       <v-card-text>
@@ -24,9 +24,14 @@
             label="password"
             v-model="password"
           />
-          <v-card-actions class="mt-5">
-            <v-btn class="info mx-auto" @click="submit">Create account</v-btn>
-          </v-card-actions>
+          <v-btn
+            class="info ml-3 mt-7"
+            @click="submit"
+            max-width="540"
+            :width="$vuetify.breakpoint.width - 100"
+          >
+            Create account
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
