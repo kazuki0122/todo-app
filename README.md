@@ -13,10 +13,10 @@ password: 1111
 
 # 使用技術
 
-- フレームワーク
+- 使用技術/フレームワーク
 
-  - Vue.js
-  - Firebase
+  - フロントエンド: Vue.js
+  - バックエンド: Firebase
 
 - Vue.js ライブラリ
   - Vuetify
