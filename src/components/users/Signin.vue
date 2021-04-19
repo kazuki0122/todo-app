@@ -6,8 +6,8 @@
       max-width="600"
       min-height="300"
     >
-      <v-card-title>
-        <h3>Sign in to Task App</h3>
+      <v-card-title class="justify-center">
+        <h3>Sign in to Todo App</h3>
       </v-card-title>
       <v-card-text>
         <v-form>
@@ -24,11 +24,27 @@
             label="password"
             v-model="password"
           />
-          <v-card-actions class="mt-5">
-            <v-btn class="info mx-auto" @click="submit">Sign in</v-btn>
-          </v-card-actions>
+          <v-btn
+            class="info ml-3 mt-7"
+            :width="$vuetify.breakpoint.width - 100"
+            max-width="540"
+            @click="submit"
+            >Sign in</v-btn
+          >
         </v-form>
       </v-card-text>
+    </v-card>
+    <v-card
+      :width="$vuetify.breakpoint.width - 50"
+      class="mx-auto mt-5 text-center px-4"
+      max-width="600"
+    >
+      <div class="mx-auto justify-center my-3 text-subtitle-2">
+        New to Todo App?
+        <router-link to="/signup" class="text-decoration-none">
+          Create an account.
+        </router-link>
+      </div>
     </v-card>
   </v-app>
 </template>

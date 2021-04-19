@@ -16,8 +16,8 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title"> Task App </v-list-item-title>
-          <v-list-item-subtitle> Best Todo Ever! </v-list-item-subtitle>
+          <v-list-item-title class="title"> Todo App </v-list-item-title>
+          <v-list-item-subtitle> Welcome to my app! </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -46,7 +46,7 @@
                 <v-icon> mdi-login </v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>Sign in to Task App</v-list-item-title>
+                <v-list-item-title>Sign in to Todo App</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-list-item @click="gotoSignup">
