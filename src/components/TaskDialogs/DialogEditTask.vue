@@ -1,7 +1,7 @@
 <template>
   <v-dialog :value="true" persistent max-width="290">
     <v-card>
-      <v-card-title class="headline"> Edit list </v-card-title>
+      <v-card-title class="headline"> Edit task </v-card-title>
       <v-card-text>
         Edit the title of a task:
         <v-text-field v-model="taskTitle" />
@@ -33,7 +33,7 @@ export default {
         return;
       }
       const payload = {
-        listId: this.$route.params.id,
+        genreId: this.$route.params.id,
         taskId: this.task.id,
         content: this.taskTitle,
       };

@@ -73,7 +73,7 @@ export default {
       },
       set(value) {
         let payload = {
-          listId: this.$route.params.id,
+          genreId: this.$route.params.id,
           value: value,
         };
         this.$store.dispatch("updateTask", payload);
@@ -87,7 +87,7 @@ export default {
       }
       let payload = {
         content: this.task,
-        listId: this.$route.params.id,
+        genreId: this.$route.params.id,
       };
       this.$store.dispatch("createTask", payload);
       this.task = "";
@@ -97,13 +97,13 @@ export default {
       const payload = {
         task: task,
         i: i,
-        listId: this.$route.params.id,
+        genreId: this.$route.params.id,
       };
       this.$store.dispatch("completeTask", payload);
     },
   },
   created() {
-    const listId = this.$route.params.id;
+    const genreId = this.$route.params.id;
     auth.onAuthStateChanged((user) => {
       const date = new Date();
       const newdate = new Date(
@@ -117,10 +117,10 @@ export default {
       console.log(newdate);
       db.collection("users")
         .doc(user.uid)
-        .collection("lists")
-        .doc(listId)
+        .collection("genres")
+        .doc(genreId)
         .collection("tasks")
-        .where("createdAt", ">", newdate)
+        .orderBy("sortId", "asc")
         .onSnapshot((querySnapshot) => {
           const task = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });

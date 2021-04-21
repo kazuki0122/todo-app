@@ -23,12 +23,12 @@
     <DialogEdit
       v-if="dialogs.edit"
       @close="dialogs.edit = false"
-      :list="list"
+      :genre="genre"
     />
     <DialogDelete
       v-if="dialogs.delete"
       @close="dialogs.delete = false"
-      :list="list"
+      :genre="genre"
     />
   </div>
 </template>
@@ -37,7 +37,7 @@
 import DialogEdit from "@/components/ListDialogs/DialogEdit.vue";
 import DialogDelete from "@/components/ListDialogs/DialogDelete.vue";
 export default {
-  props: ["list"],
+  props: ["genre"],
   data: () => ({
     dialogs: {
       edit: false,
@@ -48,7 +48,7 @@ export default {
         title: "Show Tasks",
         icon: "mdi-location-enter",
         click() {
-          this.$router.push({ name: "Task", params: { id: this.list.id } });
+          this.$router.push({ name: "Task", params: { id: this.genre.id } });
         },
       },
       {

@@ -27,7 +27,7 @@ export default {
     delteTask: function (task) {
       const payload = {
         id: task.id,
-        listId: this.$route.params.id,
+        genreId: this.$route.params.id,
         index: this.i,
       };
       this.$store.dispatch("delteTask", payload);

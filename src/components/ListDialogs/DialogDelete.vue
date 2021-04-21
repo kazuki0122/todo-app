@@ -1,10 +1,10 @@
 <template>
   <v-dialog :value="true" persistent max-width="290">
     <v-card>
-      <v-card-title class="headline"> Delete List? </v-card-title>
+      <v-card-title class="headline"> Delete genre? </v-card-title>
       <v-card-text
         >Are you sure you wanna delete this gosh darn motherflipping
-        list?</v-card-text
+        genre?</v-card-text
       >
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -12,7 +12,7 @@
         <v-btn
           color="red darken-1"
           text
-          @click="$store.dispatch('deleteList', list.id)"
+          @click="$store.dispatch('deleteGenre', genre.id)"
         >
           Yes
         </v-btn>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  props: ["list"],
+  props: ["genre"],
   data() {
     return {
       dialog: false,

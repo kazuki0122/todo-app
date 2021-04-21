@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Signup from './components/Users/Signup';
 import Signin from './components/Users/Signin';
-import List from './components/Lists/List';
+import Genre from './components/Genre/Genre';
 import Task from './components/Tasks/Task';
 import Progress from './components/Progress/Progress';
 import firebase from 'firebase';
@@ -15,8 +15,8 @@ const router =  new Router({
   routes: [
     {
      path: '/',
-     name: 'List',
-      component: List,
+     name: 'Genre',
+      component: Genre,
     },
     {
      path: '/:id/task',
