@@ -5,7 +5,7 @@ import { db,auth } from "../main";
 Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
-    lists: [],
+    genres: [],
     tasks: [],
     sorting: false,
     lastSortId: 0,
@@ -17,17 +17,17 @@ const store = new Vuex.Store({
     updateSortId(state, size) {
       state.lastSortId = size
     },
-    createList(state, payload) {
-      state.lists.push(payload)
+    createGenre(state, payload) {
+      state.genres.push(payload)
     },
-    updateList(state, list) {
-      state.lists = list
+    updateGenre(state, list) {
+      state.genres = list
     },
-    deleteList(state, lists) {
-      state.lists = lists
+    deleteGenre(state, genres) {
+      state.genres = genres
     },
-    saveList(state, lists) {
-      state.lists = lists
+    saveGenre(state, genres) {
+      state.genres = genres
     },
     createTask(state, payload) {
       state.tasks.push(payload)
@@ -54,46 +54,46 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    createList(context, payload) {
+    createGenre(context, payload) {
       const user = auth.currentUser;
       db.collection("users")
         .doc(user.uid)
-        .collection("lists")
+        .collection("genres")
         .add({
-          list: payload.list,
+          title: payload.genre,
           createdAt: new Date(),
         });
-      context.commit('createList', payload)
+      context.commit('createGenre', payload)
     },
-    updateList(context, payload) {
-      context.commit('updateList', payload)
+    updateGenre(context, payload) {
+      context.commit('updateGenre', payload)
     },
-    deleteList(context, listId) {
+    deleteGenre(context, genreId) {
       const user = auth.currentUser;
-      const lists =
+      const genres =
         db.collection("users")
           .doc(user.uid)
-          .collection("lists")
-          .doc(listId)
+          .collection("genres")
+          .doc(genreId)
           .delete()
-      context.commit('deleteList', lists)
+      context.commit('deleteGenre', genres)
     },
-    saveList(context, payload) {
+    saveGenre(context, payload) {
       const user = auth.currentUser;
-      const lists =
+      const genres =
         db.collection("users")
           .doc(user.uid)
-          .collection("lists")
+          .collection("genres")
           .doc(payload.id)
-          .update({ list: payload.list })
-      context.commit('saveList',lists)
+          .update({ title: payload.title })
+      context.commit('saveGenre',genres)
     },
     createTask(context, payload) {
       const user = auth.currentUser;
         db.collection("users")
           .doc(user.uid)
-          .collection("lists")
-          .doc(payload.listId)
+          .collection("genres")
+          .doc(payload.genreId)
           .collection("tasks")
           .add({
             content: payload.content,
@@ -111,8 +111,8 @@ const store = new Vuex.Store({
       const user = auth.currentUser;
        db.collection("users")
           .doc(user.uid)
-          .collection("lists")
-          .doc(payload.listId)
+          .collection("genres")
+          .doc(payload.genreId)
           .collection("tasks")
           .doc(payload.task.id)
           .update({ isComplete: payload.task.isComplete });
@@ -122,8 +122,8 @@ const store = new Vuex.Store({
       const user = auth.currentUser
       db.collection('users')
         .doc(user.uid)
-        .collection("lists")
-        .doc(payload.listId)
+        .collection("genres")
+        .doc(payload.genreId)
         .collection("tasks")
         .doc(payload.id)
         .delete()
@@ -133,8 +133,8 @@ const store = new Vuex.Store({
       const user = auth.currentUser
       db.collection('users')
         .doc(user.uid)
-        .collection('lists')
-        .doc(payload.listId)
+        .collection('genres')
+        .doc(payload.genreId)
         .collection("tasks")
         .doc(payload.taskId)
         .update({ content: payload.content })
@@ -145,8 +145,8 @@ const store = new Vuex.Store({
         const user = auth.currentUser
         db.collection('users')
           .doc(user.uid)
-          .collection('lists')
-          .doc(payload.listId)
+          .collection('genres')
+          .doc(payload.genreId)
           .collection("tasks")
           .doc(task.id)
           .update({ sortId: index })

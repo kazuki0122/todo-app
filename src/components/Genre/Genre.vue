@@ -2,33 +2,33 @@
   <v-app>
     <v-main class="mx-auto mt-4">
       <v-text-field
-        v-model="list"
+        v-model="genre"
         outlined
         clearable
-        label="Add List"
+        label="Add Genre"
         append-icon="mdi-plus"
         hide-detais
-        @click:append="sendList"
+        @click:append="sendGenre"
       ></v-text-field>
 
       <v-list dense>
-        <v-subheader v-if="lists.length">My Lists</v-subheader>
-        <v-list-item-group color="primary" v-if="lists.length">
-          <div v-for="(list, i) in lists" :key="i" style="height: 60px">
+        <v-subheader v-if="genres.length">My Genres</v-subheader>
+        <v-list-item-group color="primary" v-if="genres.length">
+          <div v-for="(genre, i) in genres" :key="i" style="height: 60px">
             <v-list-item>
               <v-list-item-icon>
                 <v-icon>mdi-format-list-bulleted</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title v-text="list.list"></v-list-item-title>
+                <v-list-item-title v-text="genre.title"></v-list-item-title>
               </v-list-item-content>
-              <ListMenu :list="list" />
+              <GenreMenu :genre="genre" />
             </v-list-item>
             <v-divider></v-divider>
           </div>
         </v-list-item-group>
-        <div v-else class="no-lists">
-          <div class="text-h5 primary--text">No Lists</div>
+        <div v-else class="no-genres">
+          <div class="text-h5 primary--text">No genres</div>
         </div>
       </v-list>
     </v-main>
@@ -38,29 +38,29 @@
 <script>
 import { auth, db } from "@/main";
 import { mapState } from "vuex";
-import ListMenu from "./ListMenu.vue";
+import GenreMenu from "./GenreMenu.vue";
 export default {
   data() {
     return {
-      list: "",
+      genre: "",
     };
   },
   components: {
-    ListMenu,
+    GenreMenu,
   },
   computed: {
-    ...mapState(["lists"]),
+    ...mapState(["genres"]),
   },
   methods: {
-    sendList: function () {
-      if (this.list === "") {
+    sendGenre: function () {
+      if (this.genre === "") {
         return;
       }
-      this.$store.dispatch("createList", { list: this.list });
-      this.list = "";
+      this.$store.dispatch("createGenre", { genre: this.genre });
+      this.genre = "";
     },
-    deleteList: function (listId) {
-      this.$store.dispatch("deleteList", listId);
+    deleteGenre: function (genreId) {
+      this.$store.dispatch("deleteGenre", genreId);
     },
   },
   firestore() {
@@ -76,13 +76,13 @@ export default {
     auth.onAuthStateChanged((user) => {
       db.collection("users")
         .doc(user.uid)
-        .collection("lists")
+        .collection("genres")
         .orderBy("createdAt")
         .onSnapshot((querySnapshot) => {
           const list = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
           });
-          this.$store.commit("updateList", list);
+          this.$store.commit("updateGenre", list);
         });
     });
   },
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style scoped>
-.no-lists {
+.no-genres {
   position: absolute;
   left: 50%;
   top: 40%;

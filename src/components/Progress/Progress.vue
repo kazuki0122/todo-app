@@ -1,9 +1,9 @@
 <template>
   <v-main>
-    <v-container v-if="lists.length">
+    <v-container v-if="genres.length">
       <v-row>
-        <v-col v-for="(list, index) in lists" :key="index" cols="12" lg="6">
-          <Card :list="list" />
+        <v-col v-for="(genre, index) in genres" :key="index" cols="12" lg="6">
+          <Card :genre="genre" />
         </v-col>
       </v-row>
     </v-container>
@@ -22,7 +22,7 @@ export default {
     Card,
   },
   computed: {
-    ...mapState(["lists", "tasks"]),
+    ...mapState(["genres", "tasks"]),
     progress() {
       if (this.completedTasks === 0) {
         return;
@@ -34,14 +34,13 @@ export default {
     auth.onAuthStateChanged((user) => {
       db.collection("users")
         .doc(user.uid)
-        .collection("lists")
+        .collection("genres")
         .orderBy("createdAt")
         .onSnapshot((querySnapshot) => {
-          const list = querySnapshot.docs.map((doc) => {
+          const genre = querySnapshot.docs.map((doc) => {
             return Object.assign(doc.data(), { id: doc.id });
           });
-          this.$store.commit("updateList", list);
-          // this.copleteTask();
+          this.$store.commit("updateGenre", genre);
         });
     });
   },

@@ -1,7 +1,7 @@
 <template>
   <v-card height="420">
     <v-card-title class="justify-center text-subtitle-1 font-weight-medium">
-      {{ list.list }}</v-card-title
+      {{ genre.title }}</v-card-title
     >
     <v-divider></v-divider>
 
@@ -39,7 +39,7 @@
 import { mapState } from "vuex";
 import { auth, db } from "@/main";
 export default {
-  props: ["list"],
+  props: ["genre"],
   data() {
     return {
       weeklyTasks: [],
@@ -68,8 +68,8 @@ export default {
       const userRef = db
         .collection("users")
         .doc(user.uid)
-        .collection("lists")
-        .doc(this.list.id)
+        .collection("genres")
+        .doc(this.genre.id)
         .collection("tasks")
         .where("createdAt", ">", date);
       const userDoc = await userRef.get();

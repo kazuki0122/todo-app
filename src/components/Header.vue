@@ -74,11 +74,11 @@ export default {
       drawer: null,
       items: [
         {
-          title: "Go To List",
+          title: "Go To Genre",
           icon: "mdi-format-list-bulleted",
           click() {
             if (this.$route.path === "/") {
-              alert("Already on the list page");
+              alert("Already on the Genre page");
               return;
             }
             if (this.authenticatedUser === false) {
