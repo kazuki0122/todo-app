@@ -28,7 +28,7 @@
           </div>
         </v-list-item-group>
         <div v-else class="no-genres">
-          <div class="text-h5 primary--text">No genres</div>
+          <div class="text-h5 primary--text">No Genres</div>
         </div>
       </v-list>
     </v-main>
