@@ -45,21 +45,22 @@ password: 111111
 
 ### **_タスク一覧_**
 
-<img width="1433" alt="スクリーンショット 2021-04-23 19 23 25" src="https://user-images.githubusercontent.com/63531246/115858243-aca5cb00-a469-11eb-9e17-9235c98f25ea.png">
+<img width="1438" alt="スクリーンショット 2021-04-23 20 00 17" src="https://user-images.githubusercontent.com/63531246/115884497-ef779b00-a489-11eb-8847-5e1adcd4cfcf.png">
 タスクにチェックがついたら達成率を表示。
 <br />
 <br />
 
 ### **_進捗確認画面_**
 
-<img width="1432" alt="スクリーンショット 2021-04-23 19 23 36" src="https://user-images.githubusercontent.com/63531246/115858294-b7606000-a469-11eb-9895-eb1e2908288b.png">
+<img width="1436" alt="スクリーンショット 2021-04-23 20 00 26" src="https://user-images.githubusercontent.com/63531246/115884722-2fd71900-a48a-11eb-8ef2-c08e9b3df46d.png">
+
 一週間辺りのタスクから達成できたタスクの割合をジャンル毎に表示
 <br />
 <br />
 
 ### **_カレンダー画面_**
 
-<img width="1434" alt="スクリーンショット 2021-04-23 19 23 04" src="https://user-images.githubusercontent.com/63531246/115858142-8ed86600-a469-11eb-81f5-3bb8e590ef4b.png">
+<img width="1436" alt="スクリーンショット 2021-04-23 20 00 37" src="https://user-images.githubusercontent.com/63531246/115884599-0d450000-a48a-11eb-84ea-b34bb023a20f.png">
 
 過去に行ったタスクを確認できます。  
 達成済みのものは青、未達成のものは赤で表示されます。
