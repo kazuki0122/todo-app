@@ -29,6 +29,14 @@ export default {
   },
   methods: {
     saveGenre() {
+      if (this.genreTitle === "") {
+        alert("Invalid Aciton");
+        return;
+      }
+      if (this.genre.title === this.genreTitle) {
+        alert("Invalid Aciton");
+        return;
+      }
       const payload = {
         id: this.genre.id,
         title: this.genreTitle,

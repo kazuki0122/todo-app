@@ -43,7 +43,6 @@ export default {
     dialogs: {
       edit: false,
       delete: false,
-      sort: false,
     },
     items: [
       {
@@ -58,13 +57,6 @@ export default {
         icon: "mdi-delete",
         click() {
           this.dialogs.delete = true;
-        },
-      },
-      {
-        title: "Sort",
-        icon: "mdi-drag-horizontal-variant",
-        click() {
-          this.$store.commit("sortTask");
         },
       },
     ],

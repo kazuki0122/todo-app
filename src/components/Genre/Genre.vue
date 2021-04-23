@@ -1,7 +1,14 @@
 <template>
   <v-app>
     <v-main class="mx-auto mt-4">
+      <div class="mx-auto mt-8">
+        <h2 class="display-1 success--text">
+          Genres:
+          {{ genres.length }}
+        </h2>
+      </div>
       <v-text-field
+        class="mt-5"
         v-model="genre"
         outlined
         clearable
@@ -39,6 +46,7 @@
 import { auth, db } from "@/main";
 import { mapState } from "vuex";
 import GenreMenu from "./GenreMenu.vue";
+
 export default {
   data() {
     return {
@@ -68,12 +76,12 @@ export default {
       task: db.collection("tasks"),
     };
   },
-  created() {
+  async created() {
     // querySnapshotが現在のデータ
     // doc.id = ドキュメントのidのこと
     // doc.data()ドキュメントの中のdataのこと
     // .onSnapshot 変更があるたびに発火する
-    auth.onAuthStateChanged((user) => {
+    await auth.onAuthStateChanged((user) => {
       db.collection("users")
         .doc(user.uid)
         .collection("genres")

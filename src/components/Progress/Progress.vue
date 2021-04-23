@@ -1,8 +1,14 @@
 <template>
   <v-main>
     <v-container v-if="genres.length">
-      <v-row>
-        <v-col v-for="(genre, index) in genres" :key="index" cols="12" lg="6">
+      <v-row justify="center">
+        <v-col
+          v-for="(genre, index) in genres"
+          :key="index"
+          cols="12"
+          lg="6"
+          xl="6"
+        >
           <Card :genre="genre" />
         </v-col>
       </v-row>
@@ -30,8 +36,8 @@ export default {
       return (this.completedTasks / this.tasks.length) * 100;
     },
   },
-  created() {
-    auth.onAuthStateChanged((user) => {
+  async created() {
+    await auth.onAuthStateChanged((user) => {
       db.collection("users")
         .doc(user.uid)
         .collection("genres")

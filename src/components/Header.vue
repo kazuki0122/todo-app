@@ -74,7 +74,7 @@ export default {
       drawer: null,
       items: [
         {
-          title: "Go To Genre",
+          title: "Genres",
           icon: "mdi-format-list-bulleted",
           click() {
             if (this.$route.path === "/") {
@@ -101,6 +101,23 @@ export default {
               return;
             }
             this.$router.push("/progress");
+          },
+        },
+        {
+          title: "Calendar",
+          icon: "mdi-calendar",
+          click() {
+            if (this.$route.path === "/calendar") {
+              alert("Already on the calendar page");
+              return;
+            }
+            if (this.authenticatedUser === false) {
+              alert("Already on the calendar page ");
+              return;
+            }
+            this.$router.push({
+              name: "Calendar",
+            });
           },
         },
         {

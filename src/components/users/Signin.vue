@@ -51,7 +51,6 @@
 
 <script>
 import { auth } from "@/main";
-// import { db } from '../main'
 export default {
   name: "app",
   data: () => ({
@@ -63,7 +62,6 @@ export default {
     submit() {
       auth.signInWithEmailAndPassword(this.email, this.password).then(
         () => {
-          alert("Success!");
           this.$router.push("/");
         },
         (err) => {
