@@ -49,7 +49,7 @@ const router =  new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/' || to.path === '/progress' || to.name === 'Task') {
+  if (to.path === '/' || to.path === '/progress' || to.name === 'Task' || to.name === 'Calendar') {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         next()
