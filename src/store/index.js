@@ -7,16 +7,11 @@ const store = new Vuex.Store({
   state: {
     genres: [],
     tasks: [],
-    sorting: false,
-    lastSortId: 0,
   },
   getters: {
     
   },
   mutations: {
-    updateSortId(state, size) {
-      state.lastSortId = size
-    },
     createGenre(state, payload) {
       state.genres.push(payload)
     },
@@ -35,6 +30,9 @@ const store = new Vuex.Store({
     reloadTask(state, task) {
       state.tasks = task
     },
+    reloadCalendarTask(state, task) {
+      state.tasks = task
+    },
     completeTask(state, task) {
       state.tasks[task.i].task = task
     },
@@ -46,12 +44,9 @@ const store = new Vuex.Store({
     editTask(state, task) {
       state.tasks = task
     },
-    sortTask(state) {
-      state.sorting = !state.sorting
-    },
-    updateTask(state, payload) {
-      state.tasks = payload.value
-    }
+    // updateTask(state, payload) {
+    //   state.tasks = payload.value
+    // },
   },
   actions: {
     createGenre(context, payload) {
@@ -100,12 +95,14 @@ const store = new Vuex.Store({
             createdAt: new Date(),
             editTask: false,
             isComplete: false,
-            sortId: this.state.lastSortId
           });
       context.commit('createTask', payload)
     },
     reloadTask(context, task) {
       context.commit('reloadTask', task)
+    },
+    reloadCalendarTask(context, task) {
+      context.commit('reloadCalendarTask', task)
     },
     completeTask(context, payload) {
       const user = auth.currentUser;
@@ -140,19 +137,19 @@ const store = new Vuex.Store({
         .update({ content: payload.content })
       context.commit('editTask', payload)
     },
-    updateTask(context, payload) {
-      payload.value.forEach((task , index) => {
-        const user = auth.currentUser
-        db.collection('users')
-          .doc(user.uid)
-          .collection('genres')
-          .doc(payload.genreId)
-          .collection("tasks")
-          .doc(task.id)
-          .update({ sortId: index })
-      });
-      context.commit('updateTask',payload)
-    }
+    // updateTask(context, payload) {
+    //   payload.value.forEach((task , index) => {
+    //     const user = auth.currentUser
+    //     db.collection('users')
+    //       .doc(user.uid)
+    //       .collection('genres')
+    //       .doc(payload.genreId)
+    //       .collection("tasks")
+    //       .doc(task.id)
+    //       .update({ sortId: index })
+    //   });
+    //   context.commit('updateTask',payload)
+    // },
   },
 })
 

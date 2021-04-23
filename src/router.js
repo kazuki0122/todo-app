@@ -6,6 +6,8 @@ import Genre from './components/Genre/Genre';
 import Task from './components/Tasks/Task';
 import Progress from './components/Progress/Progress';
 import firebase from 'firebase';
+import Calendar from './components/Calendar';
+
 
 
 Vue.use(Router)
@@ -37,14 +39,17 @@ const router =  new Router({
       path: '/progress',
       name: 'Progress',
       component: Progress
+    },
+    {
+      path: '/calendar',
+      name: 'Calendar',
+      component: Calendar,
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/' || to.path === '/progress' || to.name === 'Task') {
-    // このルートはログインされているかどうか認証が必要です。
-    // もしされていないならば、ログインページにリダイレクトします。
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         next()

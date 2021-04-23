@@ -40,7 +40,6 @@
 
 <script>
 import { db, auth } from "@/main";
-// import { db } from '../main'
 export default {
   name: "app",
   data: () => ({
@@ -57,7 +56,6 @@ export default {
           db.collection("users").doc(user.user.uid).set({
             email: this.email,
           });
-          alert("Create account");
           this.$router.push("/");
         })
         .catch((error) => {

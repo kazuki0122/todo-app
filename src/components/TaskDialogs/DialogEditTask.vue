@@ -30,6 +30,11 @@ export default {
   methods: {
     editTask() {
       if (this.taskTitle === "") {
+        alert("Invalid Aciton");
+        return;
+      }
+      if (this.task.content === this.taskTitle) {
+        alert("Invalid Aciton");
         return;
       }
       const payload = {

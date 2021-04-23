@@ -45,7 +45,7 @@ export default {
     },
     items: [
       {
-        title: "Show Tasks",
+        title: "Tasks",
         icon: "mdi-location-enter",
         click() {
           this.$router.push({ name: "Task", params: { id: this.genre.id } });
