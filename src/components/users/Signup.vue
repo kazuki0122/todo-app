@@ -7,13 +7,13 @@
       min-height="300"
     >
       <v-card-title class="justify-center">
-        <h3>Create your account</h3>
+        <h3>新規登録</h3>
       </v-card-title>
       <v-card-text>
         <v-form>
           <v-text-field
             prepend-icon="mdi-email"
-            label="email"
+            label="メールアドレスを入力"
             v-model="email"
           />
           <v-text-field
@@ -21,7 +21,7 @@
             @click:append="showPassword = !showPassword"
             prepend-icon="mdi-lock"
             v-bind:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            label="password"
+            label="パスワードを入力"
             v-model="password"
           />
           <v-btn
@@ -30,7 +30,7 @@
             max-width="540"
             :width="$vuetify.breakpoint.width - 100"
           >
-            Create account
+            登録する
           </v-btn>
         </v-form>
       </v-card-text>

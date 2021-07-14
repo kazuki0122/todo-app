@@ -5,7 +5,7 @@
       <v-text-field
         v-model="task"
         outlined
-        label="Add Task"
+        label="タスクを追加"
         append-icon="mdi-plus"
         hide-details
         clearable

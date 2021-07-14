@@ -12,7 +12,7 @@
         v-model="genre"
         outlined
         clearable
-        label="Add Genre"
+        label="ジャンルを入力"
         append-icon="mdi-plus"
         hide-detais
         @click:append="sendGenre"

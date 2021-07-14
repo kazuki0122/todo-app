@@ -7,13 +7,13 @@
     <v-divider class="mt-4"></v-divider>
     <v-row class="my-1" align="center">
       <strong class="mx-4 info--text text--darken-2">
-        Remaining: {{ remainingTasks }}
+        未完了: {{ remainingTasks }}
       </strong>
 
       <v-divider vertical></v-divider>
 
       <strong class="mx-4 success--text text--darken-2">
-        Completed: {{ completedTasks }}
+        完了: {{ completedTasks }}
       </strong>
 
       <v-progress-circular

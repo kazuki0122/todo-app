@@ -46,14 +46,14 @@ export default {
     },
     items: [
       {
-        title: "Edit",
+        title: "編集する",
         icon: "mdi-pencil",
         click() {
           this.dialogs.edit = true;
         },
       },
       {
-        title: "Delete",
+        title: "削除する",
         icon: "mdi-delete",
         click() {
           this.dialogs.delete = true;

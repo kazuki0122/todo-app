@@ -1,15 +1,14 @@
 <template>
   <v-dialog :value="true" persistent max-width="290">
     <v-card>
-      <v-card-title class="headline"> Delete task? </v-card-title>
-      <v-card-text
-        >Are you sure you wanna delete this gosh darn motherflipping
-        task?</v-card-text
-      >
+      <v-card-title class="headline"> 削除しますか？ </v-card-title>
+      <v-card-text>タスクを削除すると、タスク一覧から削除されます</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="$emit('close')"> No </v-btn>
-        <v-btn color="red darken-1" text @click="delteTask(task)"> Yes </v-btn>
+        <v-btn text @click="$emit('close')"> 閉じる </v-btn>
+        <v-btn color="red darken-1" text @click="delteTask(task)">
+          削除する
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
