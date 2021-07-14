@@ -7,7 +7,7 @@
 
     <v-card-subtitle class="mt-5 d-flex justify-center">
       <v-icon color="primary" class="mr-2"> mdi-format-list-checks </v-icon>
-      <div class="text-subtitle-2 mt-2">Number of tasks per week:</div>
+      <div class="text-subtitle-2 mt-2">一週間のタスク数:</div>
       <div class="text-h4 ml-3 black--text">
         {{ this.weeklyTasks.length }}
       </div>
@@ -15,7 +15,7 @@
 
     <v-card-subtitle class="success--text d-flex justify-center">
       <v-icon color="red" class="mr-2"> mdi-fire </v-icon>
-      <div class="text-subtitle-2 mt-2">Number of tasks completed:</div>
+      <div class="text-subtitle-2 mt-2">一週間のタスクの達成数:</div>
       <div class="text-h4 ml-3 red--text">
         {{ completedTasks }}
       </div>

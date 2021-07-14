@@ -45,21 +45,21 @@ export default {
     },
     items: [
       {
-        title: "Tasks",
+        title: "タスク一覧へ",
         icon: "mdi-location-enter",
         click() {
           this.$router.push({ name: "Task", params: { id: this.genre.id } });
         },
       },
       {
-        title: "Edit",
+        title: "編集する",
         icon: "mdi-pencil",
         click() {
           this.dialogs.edit = true;
         },
       },
       {
-        title: "Delete",
+        title: "削除する",
         icon: "mdi-delete",
         click() {
           this.dialogs.delete = true;

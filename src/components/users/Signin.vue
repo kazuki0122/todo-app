@@ -7,13 +7,13 @@
       min-height="300"
     >
       <v-card-title class="justify-center">
-        <h3>Sign in to Todo App</h3>
+        <h3>Todo App</h3>
       </v-card-title>
       <v-card-text>
         <v-form>
           <v-text-field
             prepend-icon="mdi-email"
-            label="email"
+            label="メールアドレスを入力"
             v-model="email"
           />
           <v-text-field
@@ -21,7 +21,7 @@
             @click:append="showPassword = !showPassword"
             prepend-icon="mdi-lock"
             v-bind:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            label="password"
+            label="パスワードを入力"
             v-model="password"
           />
           <v-btn
@@ -29,7 +29,7 @@
             :width="$vuetify.breakpoint.width - 100"
             max-width="540"
             @click="submit"
-            >Sign in</v-btn
+            >ログインする</v-btn
           >
         </v-form>
       </v-card-text>
@@ -40,9 +40,9 @@
       max-width="600"
     >
       <div class="mx-auto justify-center my-3 text-subtitle-2">
-        New to Todo App?
+        アカウントをお持ちでない場合はこちらから
         <router-link to="/signup" class="text-decoration-none">
-          Create an account.
+          新規登録
         </router-link>
       </div>
     </v-card>

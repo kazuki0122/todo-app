@@ -16,6 +16,7 @@
       class="mx-auto"
     >
       <v-calendar
+        locale="ja-jp"
         :type="type"
         ref="calendar"
         v-model="value"

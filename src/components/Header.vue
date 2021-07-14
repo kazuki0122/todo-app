@@ -46,7 +46,7 @@
                 <v-icon> mdi-login </v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>Sign in to Todo App</v-list-item-title>
+                <v-list-item-title>ログイン</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-list-item @click="gotoSignup">
@@ -54,7 +54,7 @@
                 <v-icon> mdi-account-plus </v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>Create your account</v-list-item-title>
+                <v-list-item-title>新規登録</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </div>
@@ -74,45 +74,45 @@ export default {
       drawer: null,
       items: [
         {
-          title: "Genres",
+          title: "ジャンル一覧",
           icon: "mdi-format-list-bulleted",
           click() {
             if (this.$route.path === "/") {
-              alert("Already on the Genre page");
+              alert("無効な操作です。");
               return;
             }
             if (this.authenticatedUser === false) {
-              alert("Please register as a member");
+              alert("無効な操作です。");
               return;
             }
             this.$router.push("/");
           },
         },
         {
-          title: "Progress Check",
+          title: "進捗一覧",
           icon: "mdi-progress-check",
           click() {
             if (this.$route.path === "/progress") {
-              alert("Already on the progress page");
+              alert("無効な操作です。");
               return;
             }
             if (this.authenticatedUser === false) {
-              alert("Please register as a member");
+              alert("無効な操作です。");
               return;
             }
             this.$router.push("/progress");
           },
         },
         {
-          title: "Calendar",
+          title: "カレンダー",
           icon: "mdi-calendar",
           click() {
             if (this.$route.path === "/calendar") {
-              alert("Already on the calendar page");
+              alert("無効な操作です。");
               return;
             }
             if (this.authenticatedUser === false) {
-              alert("Already on the calendar page ");
+              alert("無効な操作です。");
               return;
             }
             this.$router.push({
@@ -121,11 +121,11 @@ export default {
           },
         },
         {
-          title: "Sign Out",
+          title: "ログアウト",
           icon: "mdi-logout",
           click() {
             if (this.authenticatedUser === false) {
-              alert("You are already signed out");
+              alert("無効な操作です。");
               return;
             }
             firebase
@@ -166,14 +166,14 @@ export default {
     },
     gotoSignup: function () {
       if (this.$route.path === "/signup") {
-        alert("Already on the signup page");
+        alert("無効な操作です。");
         return;
       }
       this.$router.push("/signup");
     },
     gotosSignin: function () {
       if (this.$route.path === "/signin") {
-        alert("Already on the signin page");
+        alert("無効な操作です。");
         return;
       }
       this.$router.push("/signin");
